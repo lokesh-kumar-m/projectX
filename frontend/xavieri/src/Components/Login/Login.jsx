@@ -1,10 +1,22 @@
 import { useState } from "react";
+import { useAuth } from "../auth";
+import { useNavigate } from "react-router-dom";
+
 import './login.css'
+
 const Login = () => {
+    const authContext=useAuth()
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
+    const [ErrorMessage,setMessage]=useState('')
+    const NavigateTo=useNavigate()
+    async function handleLogin() {
+        if(await authContext.islogin(name,password)){
+            NavigateTo(`/welcome/${name}`)
+        }else{
+            setMessage("Please check your username and password")
+        }
 
-    function handleSubmit() {
         console.log("clicked")
     }
     return (
@@ -34,7 +46,7 @@ const Login = () => {
                                 placeholder="password"
                                 onChange={e => setPassword(e.target.value)} />
                         </div>
-                        <button className="btn" onClick={handleSubmit}>Submit</button>
+                        <button className="btn" onClick={handleLogin}>Login</button>
                     </div>
                     <div className="new-user">
                         <p>New to Bill Manager?  <a href="/users/register">Register Here</a></p>

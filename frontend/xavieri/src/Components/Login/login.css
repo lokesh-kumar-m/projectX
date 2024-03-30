@@ -1,0 +1,85 @@
+.login-container{
+    display: grid;
+    grid-template-columns: .4fr 2.1fr .4fr;
+    height: 100vh;
+    background-color: rgb(246, 245, 243);
+}
+.main-container{
+	width:100%;
+	border-radius: 20px;
+	box-shadow: 0 5px 5px rgba(0,0,0,.4);
+	margin: auto auto;
+    background-color: white;
+    display: flex;
+}
+.welcome-user{
+	background-color: #008080;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #fff;
+    width:40% ;
+    text-align: center;
+}
+.login-box{
+    padding-left: 1rem;
+    text-align: center; 
+    margin-left: 1rem;
+}
+
+.title h2{
+    color: #0F0F0F;
+    margin-bottom: 2rem;
+}
+.form-box{
+    margin-top: 1rem;
+}
+.input-box{
+    text-align: left;
+}
+.input-box input {
+    width: 80%;
+    padding-top: 10px;
+    padding-bottom: 2px;
+    font-size: 16px;
+    color: #010101;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #F94A29;
+    outline: none;
+    background: transparent;
+}
+
+.input-box label {
+    
+    padding: 10px 0;
+    font-size: 14px;
+    color: #F94A29;
+}
+.btn{
+	transition: all .5s ease;
+	width: fit-content;
+	border-radius: 30px;
+	color:#008080;
+	font-weight: 600;
+	background-color: #fff;
+	border: 1px solid #008080;
+	margin-bottom: 1em;
+    padding: .5rem 1rem;
+}
+.btn:hover, .btn:focus{
+	background-color: #008080;
+	color:#fff;
+}
+.new-user{
+ font-size: small;   
+ padding-bottom: 1rem;
+}
+.new-user a{
+    font-size: large;
+    text-decoration: none;
+    color: #E96479;
+}
+

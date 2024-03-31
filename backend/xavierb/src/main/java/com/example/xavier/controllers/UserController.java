@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,7 +53,7 @@ public class UserController {
         boolean isValidUserName=user.getUsername().equalsIgnoreCase(userRegistry.getUsername());
         boolean isValidPassword=passwordEncoder.matches(userRegistry.getPassword(),user.getPassword());
         if(isValidPassword&&isValidUserName){
-            String token=jwtResponse.createToken(user.getUsername());
+            String token=jwtResponse.getJwtToken(user.getUsername());
             return new ResponseEntity<>(token,HttpStatus.OK);    
         }
         return new ResponseEntity<>("invalid credentials",HttpStatus.BAD_REQUEST);
@@ -65,3 +65,5 @@ public class UserController {
     }
 
 }
+
+

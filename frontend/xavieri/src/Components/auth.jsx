@@ -1,8 +1,10 @@
 import { createContext, useContext, useState } from "react";
 import { apiContext } from "./API/apiContext";
+import { AuthenticateUser } from "./API/userApiService";
 
 export const AuthContext=createContext()
 export const useAuth=()=>useContext(AuthContext)
+
 const Auth=({children})=>{
     const [isAuthentic,setAuthentic]=useState(false)
     const [username,setName]=useState('')
@@ -10,19 +12,19 @@ const Auth=({children})=>{
     async function islogin(username,password){
         try{
             //api call to check if user exists
-            var response=false
-            if(response){
-                const token=""
-            const jwtToken='Bearer '+token
+            const response=await AuthenticateUser({"username":username,"password":password})
+            if(response.status==200){
+            const jwtToken='Bearer '+response.data
+            console.log(jwtToken)
             setToken(jwtToken)
             setName(username)
             setAuthentic(true)
-            // apiContext.interceptors.request.use(
-            //     (config)=>{
-            //         config.headers.Authorization=jwtToken
-            //         return config
-            //     }
-            // )
+            apiContext.interceptors.request.use(
+                (config)=>{
+                    config.headers.Authorization=jwtToken
+                    return config
+                }
+            )
             return true;
             }
             else{
@@ -39,9 +41,9 @@ const Auth=({children})=>{
         setToken('')
         setAuthentic(false)
     }
-    
+
     return(
-        <AuthContext.Provider value={{username,isAuthentic,authToken}}>
+        <AuthContext.Provider value={ {username,isAuthentic,authToken,islogin} }>
             {children}
         </AuthContext.Provider>
     );

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AddNewUser } from "../API/userApiService";
-
 import './Register.css'
-
 
 const RegisterUser = () => {
     const [username, setName] = useState("")
     const [emailid, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigateTo=useNavigate()
 
     function handleSubmit() {
         const USER = {
@@ -23,7 +23,7 @@ const RegisterUser = () => {
     }
     function isCreated(response) {
         if (response.status == 200) {
-            console.log("USer Created successfully")
+            navigateTo(`/users/login`)
         }
         else if (response.status == 400) {
             console.log("A user with the username already exists")

@@ -29,9 +29,8 @@
     margin-right: auto;
 }
 .login-box{
-    padding-left: 1rem;
     text-align: center; 
-    margin-left: 1rem;
+    margin: 1rem 2rem;
 }
 
 .title h2{
@@ -52,7 +51,7 @@
     color: #010101;
     margin-bottom: 30px;
     border: none;
-    border-bottom: 1px solid #F94A29;
+    border-bottom: 2px solid #C07CCE;
     outline: none;
     background: transparent;
 }
@@ -61,7 +60,7 @@
     
     padding: 10px 0;
     font-size: 14px;
-    color: #F94A29;
+    color: #C07CCE;
 }
 .btn{
 	transition: all .5s ease;

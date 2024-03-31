@@ -3,10 +3,20 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import RegisterUser from "../Register/Register";
 import Error from "../UnefinedPath/Error";
 import Login from "../Login/Login";
+import Auth, { useAuth } from "../auth";
+
+function AuthenticatedRoutes({children}){
+    const authContext=useAuth()
+    if(authContext.isAuthentic){
+        return children
+    }
+    return <Navigate to="/"></Navigate>
+}
 
 const Manager = () => {
     return (
         <div>
+            <Auth>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<RegisterUser />}/>
@@ -16,6 +26,7 @@ const Manager = () => {
                     <Route path="*" element={<Error />} />
                 </Routes>
             </BrowserRouter>
+            </Auth>
         </div>
     );
 }

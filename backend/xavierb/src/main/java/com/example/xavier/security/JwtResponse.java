@@ -2,7 +2,6 @@ package com.example.xavier.security;
 
 import java.time.Instant;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -16,7 +15,10 @@ public class JwtResponse {
         this.encoder = encoder;
     }
     
-    public String createToken(String name){
+    public String getJwtToken(String name){
+        return createToken(name);
+    }
+    private String createToken(String name){
         var claimSet=JwtClaimsSet.builder()
         .issuer("self")
         .issuedAt(Instant.now())

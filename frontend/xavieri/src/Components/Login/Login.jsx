@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "../auth";
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../auth";
+import { JwtTest } from "../API/userApiService";
 import Hello from "../../assets/hello.png"
 import './login.css'
 
@@ -13,12 +13,15 @@ const Login = () => {
     const NavigateTo=useNavigate()
     async function handleLogin() {
         if(await authContext.islogin(name,password)){
-            NavigateTo(`/welcome/${name}`)
+            // NavigateTo(`/welcome/${name}`)
+            JwtTest().then(
+                (response)=>console.log(response.data)
+            ).catch(
+                (error)=>console.log(error)
+            )
         }else{
-            setMessage("Please check your username and password")
+            setMessage("Please check username and password")
         }
-
-        console.log("clicked")
     }
     return (
         <div className="login-container">
@@ -48,6 +51,7 @@ const Login = () => {
                                 placeholder="password"
                                 onChange={e => setPassword(e.target.value)} />
                         </div>
+                        <span>{ErrorMessage}</span>
                         <button className="btn" onClick={handleLogin}>Login</button>
                     </div>
                     <div className="new-user">

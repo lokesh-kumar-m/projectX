@@ -2,6 +2,7 @@ package com.example.xavier.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.xavier.Dto.RegisterUserDto;
 import com.example.xavier.Repository.UserRepository;
 import com.example.xavier.model.UsersEntity;
+import com.example.xavier.security.JwtResponse;
 
 @RestController
 public class UserController {
@@ -21,11 +23,13 @@ public class UserController {
 
     private UserRepository userService;
     private PasswordEncoder passwordEncoder;
+    private JwtResponse jwtResponse;
 
     public UserController(UserRepository userService,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder, JwtResponse jwtResponse) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.jwtResponse=jwtResponse;
     }
 
     @PostMapping(path = "/users/register")
@@ -47,11 +51,10 @@ public class UserController {
     public ResponseEntity<String> getUserDetails(@RequestBody RegisterUserDto userRegistry){
         UsersEntity user=userService.findByUsername(userRegistry.getUsername()).get();
         boolean isValidUserName=user.getUsername().equalsIgnoreCase(userRegistry.getUsername());
-        logger.info(" "+isValidUserName);
         boolean isValidPassword=passwordEncoder.matches(userRegistry.getPassword(),user.getPassword());
-        logger.info(" "+isValidPassword);
         if(isValidPassword&&isValidUserName){
-            return new ResponseEntity<>("Welcome user",HttpStatus.OK);    
+            String token=jwtResponse.createToken(user.getUsername());
+            return new ResponseEntity<>(token,HttpStatus.OK);    
         }
         return new ResponseEntity<>("invalid credentials",HttpStatus.BAD_REQUEST);
     }

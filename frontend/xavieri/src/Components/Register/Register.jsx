@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AddNewUser } from "../API/userApiRegistratoin";
+import { AddNewUser } from "../API/userApiService";
 
 import './Register.css'
 

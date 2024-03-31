@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
-import { JwtTest } from "../API/userApiService";
 import Hello from "../../assets/hello.png"
 import './login.css'
 
@@ -10,15 +9,19 @@ const Login = () => {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [ErrorMessage,setMessage]=useState('')
-    const NavigateTo=useNavigate()
+    const navigateTo=useNavigate()
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
     async function handleLogin() {
         if(await authContext.islogin(name,password)){
-            // NavigateTo(`/welcome/${name}`)
-            JwtTest().then(
-                (response)=>console.log(response.data)
-            ).catch(
-                (error)=>console.log(error)
-            )
+            setMessage("Login Successful. Redirecting..")
+            await delay(1000)
+            navigateTo(`/welcome/${name}`)
+            // JwtTest().then(
+            //     (response)=>console.log(response.data)
+            // ).catch(
+            //     (error)=>console.log(error)
+            // )
         }else{
             setMessage("Please check username and password")
         }
@@ -51,7 +54,7 @@ const Login = () => {
                                 placeholder="password"
                                 onChange={e => setPassword(e.target.value)} />
                         </div>
-                        <span>{ErrorMessage}</span>
+                        <span className="auth-message">{ErrorMessage}</span><br />
                         <button className="btn" onClick={handleLogin}>Login</button>
                     </div>
                     <div className="new-user">

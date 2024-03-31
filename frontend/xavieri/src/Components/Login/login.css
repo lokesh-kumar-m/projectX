@@ -58,8 +58,9 @@
 
 .input-box label {
     
-    padding: 10px 0;
-    font-size: 14px;
+    padding-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
     color: #C07CCE;
 }
 .btn{
@@ -86,4 +87,7 @@
     text-decoration: none;
     color: #E96479;
 }
-
+.auth-message{
+    color: rgb(247, 60, 60);
+    padding-bottom: .25rem;
+}

@@ -4,6 +4,8 @@ import RegisterUser from "../Register/Register";
 import Error from "../UnefinedPath/Error";
 import Login from "../Login/Login";
 import Auth, { useAuth } from "../auth";
+import Header from "../Header/Header";
+import Welcome from "../Home/Welcome";
 
 function AuthenticatedRoutes({children}){
     const authContext=useAuth()
@@ -18,10 +20,16 @@ const Manager = () => {
         <div>
             <Auth>
             <BrowserRouter>
+            <Header/>
                 <Routes>
-                    <Route path="/" element={<RegisterUser />}/>
-                    <Route path="/users/register" element={<RegisterUser />} />
-                    <Route path="/users/login" element={<Login/>}/>
+                    <Route path='/' element={<RegisterUser />}/>
+                    <Route path='/users/register' element={<RegisterUser />} />
+                    <Route path='/users/login' element={<Login/>}/>
+                    <Route path='/welcome/:username' element={
+                        <AuthenticatedRoutes>
+                            <Welcome></Welcome>
+                        </AuthenticatedRoutes>
+                    }/>
 
                     <Route path="*" element={<Error />} />
                 </Routes>

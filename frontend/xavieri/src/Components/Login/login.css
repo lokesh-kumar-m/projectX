@@ -23,6 +23,11 @@
     width:40% ;
     text-align: center;
 }
+.welcome-user img{
+    width: 70%;
+    margin-left:auto;
+    margin-right: auto;
+}
 .login-box{
     padding-left: 1rem;
     text-align: center; 

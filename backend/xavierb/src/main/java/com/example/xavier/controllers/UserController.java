@@ -30,11 +30,10 @@ public class UserController {
 
     @PostMapping(path = "/users/register")
     public ResponseEntity<String> getRegisterUser(@RequestBody RegisterUserDto registerUser) {
-        logger.info("********lome testing*******");
-        logger.info("" + registerUser);
-        logger.info("" + registerUser.getEmail());
+        // logger.info("********lome testing*******");
+        // logger.info("" + registerUser);
+        // logger.info("" + registerUser.getEmail());
         if (userService.existsByUsername(registerUser.getUsername())) {
-            // logger.info("Welcome:"+registerUser.getUsername());
             return new ResponseEntity<>("User Exists please login", HttpStatus.BAD_REQUEST);
         }
         UsersEntity user = new UsersEntity();
@@ -46,8 +45,15 @@ public class UserController {
     }
     @PostMapping("/users/login")
     public ResponseEntity<String> getUserDetails(@RequestBody RegisterUserDto userRegistry){
-        logger.info(""+userService.findByUsername(getHello()));
-        return new ResponseEntity<>("Welcome user",HttpStatus.OK);
+        UsersEntity user=userService.findByUsername(userRegistry.getUsername()).get();
+        boolean isValidUserName=user.getUsername().equalsIgnoreCase(userRegistry.getUsername());
+        logger.info(" "+isValidUserName);
+        boolean isValidPassword=passwordEncoder.matches(userRegistry.getPassword(),user.getPassword());
+        logger.info(" "+isValidPassword);
+        if(isValidPassword&&isValidUserName){
+            return new ResponseEntity<>("Welcome user",HttpStatus.OK);    
+        }
+        return new ResponseEntity<>("invalid credentials",HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/users/Hello")

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../auth";
 import { useNavigate } from "react-router-dom";
 
+import Hello from "../../assets/hello.png"
 import './login.css'
 
 const Login = () => {
@@ -25,6 +26,7 @@ const Login = () => {
             <div className="main-container ">
                 <div className="welcome-user">
                     <span className="Hello"><h2>Hello!</h2></span>
+                    <img src={Hello}/>
                     <h4 className="title">Bills Manager</h4>
                 </div>
                 <div className="login-box">

@@ -30,4 +30,7 @@ public class FriendRepositoryServices {
         friendServices.save(friend);
         return "new friend added!";
     }
+    public void updateAmount(int id, double amount){
+        friendServices.updateAmount(id, amount);
+    }
 }

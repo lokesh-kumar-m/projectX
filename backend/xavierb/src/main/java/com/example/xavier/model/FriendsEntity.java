@@ -6,20 +6,38 @@ import jakarta.persistence.Id;
 
 @Entity
 public class FriendsEntity {
-
     @Id
     @GeneratedValue
     private int id;
-    private String friendName;
-    private String user;
-    private long amount;
-    public FriendsEntity(int id, String friendName, String user, long amount) {
-        this.id = id;
-        this.friendName = friendName;
-        this.user = user;
+    private String friend;
+    private String currentuser;
+    private double amount;
+    public FriendsEntity(int id, String friendName, String user, double amount) {
+        this.id=id;
+        this.friend = friendName;
+        this.currentuser = user;
         this.amount = amount;
     }
     public FriendsEntity() {
+    }
+   
+    public String getFriend() {
+        return friend;
+    }
+    public void setFriend(String friendName) {
+        this.friend = friendName;
+    }
+    public String getCurrentuser() {
+        return currentuser;
+    }
+    public void setCurrentuser(String user) {
+        this.currentuser = user;
+    }
+    public double getAmount() {
+        return amount;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
     public int getId() {
         return id;
@@ -27,27 +45,9 @@ public class FriendsEntity {
     public void setId(int id) {
         this.id = id;
     }
-    public String getFriendName() {
-        return friendName;
-    }
-    public void setFriendName(String friendName) {
-        this.friendName = friendName;
-    }
-    public String getUser() {
-        return user;
-    }
-    public void setUser(String user) {
-        this.user = user;
-    }
-    public long getAmount() {
-        return amount;
-    }
-    public void setAmount(long amount) {
-        this.amount = amount;
-    }
     @Override
     public String toString() {
-        return "FriendsEntity [id=" + id + ", friendName=" + friendName + ", user=" + user + ", amount=" + amount + "]";
+        return "FriendsEntity [friendName=" + friend + ", user=" + currentuser + ", amount=" + amount + "]";
     }
 
 }

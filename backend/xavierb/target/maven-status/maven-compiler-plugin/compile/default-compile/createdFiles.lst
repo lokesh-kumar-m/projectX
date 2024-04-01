@@ -1,7 +1,9 @@
 com/example/xavier/Repository/UserRepository.class
+com/example/xavier/security/JwtResponse.class
 com/example/xavier/XavierApplication.class
 com/example/xavier/controllers/UserController.class
 com/example/xavier/security/WebSecurityConfiguration.class
 com/example/xavier/Dto/RegisterUserDto.class
+com/example/xavier/XavierApplication$1.class
 com/example/xavier/model/UsersEntity.class
 com/example/xavier/Repository/service/UserDetailsService.class

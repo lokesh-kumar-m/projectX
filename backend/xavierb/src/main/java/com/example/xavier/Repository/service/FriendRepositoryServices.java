@@ -33,4 +33,7 @@ public class FriendRepositoryServices {
     public void updateAmount(int id, double amount){
         friendServices.updateAmount(id, amount);
     }
+    public void deleteFriend(int id){
+        friendServices.deleteById(id);
+    }
 }

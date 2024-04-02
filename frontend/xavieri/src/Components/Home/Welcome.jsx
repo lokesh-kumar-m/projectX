@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../auth";
-import { getMyList,addFriend } from "../API/friendsApiService";
+import { getMyList,addFriend, removeFriend } from "../API/friendsApiService";
 
 import './home.css'
-
+import MoneyChart from "./Bar";
+import ExpensesPie from "./pie";
 const FRIEND={
     currentuser:"",
     friend:"",
@@ -34,8 +35,16 @@ const Welcome=()=>{
             (error)=>console.log(error)
         )
     }
+    function deleteFriend(id){
+        removeFriend(id).then(
+            ()=>getList()
+        ).catch(
+            (error)=>console.log(error)
+        )
+    }
     return(
         <div className="home-section">
+            
             <ul className="list-friends">
                 {
                     friendsList.map(element=>(
@@ -43,6 +52,7 @@ const Welcome=()=>{
                         <li>{element.friend}</li>
                         <li>{element.amount}</li>
                         <li>{element.id}</li>
+                        <button onClick={()=>deleteFriend(element.id)}>Delete</button>
                     </div>
                     ))
                 }
@@ -54,6 +64,9 @@ const Welcome=()=>{
                 <input type="text" value={newFriend} onChange={(e)=>setNewFriend(e.target.value)}/>
                 <input type="number" value={amount} onChange={(e)=>setAmount(e.target.value)}/>
             </div>
+            {friendsList.length>0?<MoneyChart data={friendsList}/>:""}
+            <ExpensesPie></ExpensesPie>
+            
 
         </div>
     );

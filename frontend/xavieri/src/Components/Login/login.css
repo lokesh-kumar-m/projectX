@@ -1,6 +1,6 @@
 .login-container{
     display: grid;
-    grid-template-columns: .4fr 2.1fr .4fr;
+    grid-template-columns: .8fr 1.3fr .8fr;
     height: 100vh;
     background-color: rgb(246, 245, 243);
 }

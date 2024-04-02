@@ -27,9 +27,9 @@ public class FriendsController {
     }
     @GetMapping(path="/home/{currentuser}")
     public ResponseEntity<List<FriendsEntity>> getMyFriends(@PathVariable String currentuser){
-        
         return new ResponseEntity<>(friendsRepo.getMyFriends(currentuser),HttpStatus.OK);
     }
+    
     @PostMapping(path="/home/newfriend")
     public ResponseEntity<String> addNewFriends(@RequestBody FriendsDto newFriend){
         logger.info(""+newFriend);

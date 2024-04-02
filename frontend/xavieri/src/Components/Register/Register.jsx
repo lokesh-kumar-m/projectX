@@ -7,19 +7,22 @@ const RegisterUser = () => {
     const [username, setName] = useState("")
     const [emailid, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [repassword,setRepassword]=useState("")
     const navigateTo=useNavigate()
 
     function handleSubmit() {
-        const USER = {
-            username: username,
-            password: password,
-            email: emailid
+        if(password==repassword){
+            const USER = {
+                username: username,
+                password: password,
+                email: emailid
+            }
+            AddNewUser(USER).then(
+                (response) => isCreated(response)
+            ).catch(
+                (error) => isCreated(error.response)
+            )
         }
-        AddNewUser(USER).then(
-            (response) => isCreated(response)
-        ).catch(
-            (error) => isCreated(error.response)
-        )
     }
     function isCreated(response) {
         if (response.status == 200) {
@@ -55,6 +58,13 @@ const RegisterUser = () => {
                             type="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)} />
+                    </div>
+                    <div className="prompt-box">
+                        <label>Re-enter Password</label>
+                        <input
+                            type="password"
+                            value={repassword}
+                            onChange={e => setRepassword(e.target.value)} />
                     </div>
                     <button className="submt-button" onClick={handleSubmit}>Register</button>
                 </div>

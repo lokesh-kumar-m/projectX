@@ -1,0 +1,12 @@
+.home-section{
+    margin-top: 10%;
+}
+.list-friends{
+    list-style-type: none;
+}
+
+.friend-row{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin-top: .7rem;
+}

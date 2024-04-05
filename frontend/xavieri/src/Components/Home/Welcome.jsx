@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom"
 import { useAuth } from "../auth";
 import { getMyList,addFriend, removeFriend } from "../API/friendsApiService";
+import Button from '@mui/material/Button';
 
 import './home.css'
 import MoneyChart from "./Bar";
@@ -15,6 +17,7 @@ const Welcome=()=>{
     const [friendsList,setList]=useState([])
     const [newFriend,setNewFriend]=useState('')
     const [amount, setAmount]=useState(0)
+    const navigateTo=useNavigate();
     useEffect(
         ()=>getList(),[]
     )
@@ -42,6 +45,9 @@ const Welcome=()=>{
             (error)=>console.log(error)
         )
     }
+    function navigateToAddBill(){
+        navigateTo(`/add/bills`)
+    }
     return(
         <div className="home-section">
             
@@ -67,6 +73,7 @@ const Welcome=()=>{
             {friendsList.length>0?<MoneyChart data={friendsList}/>:""}
             <ExpensesPie></ExpensesPie>
             
+            <Button variant="outlined" color="success" onClick={navigateToAddBill}>Add Bill</Button>
 
         </div>
     );

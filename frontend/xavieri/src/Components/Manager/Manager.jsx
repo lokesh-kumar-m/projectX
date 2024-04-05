@@ -6,6 +6,7 @@ import Login from "../Login/Login";
 import Auth, { useAuth } from "../auth";
 import Header from "../Header/Header";
 import Welcome from "../Home/Welcome";
+import BillSplit from "../BillSplit/Split";
 
 function AuthenticatedRoutes({children}){
     const authContext=useAuth()
@@ -30,6 +31,11 @@ const Manager = () => {
                             <Welcome></Welcome>
                         </AuthenticatedRoutes>
                     }/>
+                    <Route path="/add/bills" element={
+                        <AuthenticatedRoutes>
+                            <BillSplit></BillSplit>
+                        </AuthenticatedRoutes>
+                    }/> 
 
                     <Route path="*" element={<Error />} />
                 </Routes>

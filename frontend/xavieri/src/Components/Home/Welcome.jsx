@@ -7,14 +7,17 @@ import Button from '@mui/material/Button';
 import './home.css'
 import MoneyChart from "./Bar";
 import ExpensesPie from "./pie";
+
+
+
 const FRIEND={
     currentuser:"",
     friend:"",
     amount:0
 }
-const Welcome=()=>{
+const Welcome=({friendsList,expenseType,currencies,setList})=>{
     const authContext=useAuth()
-    const [friendsList,setList]=useState([])
+    
     const [newFriend,setNewFriend]=useState('')
     const [amount, setAmount]=useState(0)
     const navigateTo=useNavigate();
@@ -72,9 +75,8 @@ const Welcome=()=>{
             </div>
             {friendsList.length>0?<MoneyChart data={friendsList}/>:""}
             <ExpensesPie></ExpensesPie>
-            
             <Button variant="outlined" color="success" onClick={navigateToAddBill}>Add Bill</Button>
-
+            
         </div>
     );
 }

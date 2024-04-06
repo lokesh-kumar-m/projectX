@@ -42,7 +42,7 @@ public class WebSecurityConfiguration {
             .anyRequest().authenticated()
             );
         http.sessionManagement(
-            session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            session->session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
             );
         http.csrf(csrf->csrf.disable());
         http.httpBasic(Customizer.withDefaults());

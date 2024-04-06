@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react"
 
 
-const BillSplit = ({currencies,type}) => {
+const BillSplit = ({currencies,type,friendsList}) => {
+
     const [expenseAmount, setExpenseAmount] = useState(0)
     const [expenseCurrency, setExpenseCurrency] = useState('')
     const [expenseTypeValue, setExpenseType] = useState('')
     const [memberList, setMemberList] = useState([]);
     const [splitType, setSplitType] = useState('')
-    console.log("These are")
+    const [expenseDate,setExpenseDate]=useState(new Date())
 
     function addMember(selectedMember) {
         if (selectedMember !== '' && !memberList.includes(selectedMember)) {
@@ -24,6 +25,7 @@ const BillSplit = ({currencies,type}) => {
         console.log(expenseTypeValue)
         console.log(memberList)
         console.log(splitType)
+        
     }
 
     return (
@@ -52,10 +54,11 @@ const BillSplit = ({currencies,type}) => {
 
                 <label htmlFor="members">Members</label>
                 <select id="members" onChange={(e) => addMember(e.target.value)}>
-                    <option value="mem1">member1</option>
-                    <option value="mem2">mem2</option>
-                    <option value="mem3">mem3</option>
-                    <option value="mem4">mem4</option>
+                
+                {friendsList.map((friend,id)=>(
+                        <option key={id} value={friend}>{friend.friend}</option>
+                    ))}
+                    
                 </select>
                 {memberList.length > 0 ? memberList.map((name, id) => (
                     <p key={id}>{name}<span onClick={() => removeMember(name)}>X</span></p>
@@ -66,7 +69,9 @@ const BillSplit = ({currencies,type}) => {
                     <option value="custom">custom</option>
                     <option value="equally">equally</option>
                 </select>
-                <button onClick={handlesubmit}>show</button>
+                <label htmlFor="date">Date</label>
+                <input type="date" id="date" value={expenseDate} onChange={(e)=>setExpenseDate(e.target.value)}/>
+                <button onClick={handlesubmit}>Add Expense</button>
 
             </div>
         </section>

@@ -1,12 +1,11 @@
 package com.example.xavier.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-
-import java.time.LocalDate;
 
 @Entity
 public class TransactionEntity {
@@ -30,6 +29,9 @@ public class TransactionEntity {
     private List<String> members;
     private LocalDate onDate;
     private String split;
+
+    public TransactionEntity() {
+    }
 
     public int getId() {
         return id;

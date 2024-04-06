@@ -79,6 +79,7 @@ const Manager = () => {
                             <BillSplit 
                             currencies={currencies}
                             type={expenseType}
+                            friendsList={friendsList}
                             ></BillSplit>
                         </AuthenticatedRoutes>
                     }/> 

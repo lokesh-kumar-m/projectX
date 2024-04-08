@@ -15,3 +15,9 @@ export const expenseType=[
     {"type":"Games"},
     {"type":"Sports"}
 ]
+
+export const FRIEND={
+    currentuser:"",
+    friend:"",
+    amount:0
+}

@@ -24,6 +24,7 @@ public class TransactionsService {
         log.setExpenseType(type);
         log.setOnDate(on);
         log.setMembers(members);
+        log.setSplit(split);
         transactionsServices.save(log);
     }
 }

@@ -3,18 +3,14 @@ import {useNavigate} from "react-router-dom"
 import { useAuth } from "../auth";
 import { getMyList,addFriend, removeFriend } from "../API/friendsApiService";
 import Button from '@mui/material/Button';
-
+import { FRIEND } from "../API/globalVals";
 import './home.css'
 import MoneyChart from "./Bar";
 import ExpensesPie from "./pie";
 
 
 
-const FRIEND={
-    currentuser:"",
-    friend:"",
-    amount:0
-}
+
 const Welcome=({friendsList,expenseType,currencies,setList})=>{
     const authContext=useAuth()
     

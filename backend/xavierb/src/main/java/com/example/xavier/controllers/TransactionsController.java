@@ -18,6 +18,6 @@ public class TransactionsController {
     @PostMapping(path="/user/add/log")
     public void addNewLog(@RequestBody TransactionDto log){
         // double amount,String currency,String type,String split,List<String> members,LocalDate on
-        transactionService.addTransaction(log.getAmount(),log.getCurrency(), log.getExpenseType(),log.getSplit(), log.getMembers(), log.getOnDate());
+        transactionService.addTransaction(log.getAmount(),log.getCurrency(), log.getExpenseType(),log.getSplit(), log.getMembers(), log.getOnDate(),log.getPaidBy(),log.isFlag(), log.getExchangeRate());
     }
 }

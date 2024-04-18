@@ -36,4 +36,8 @@ public class FriendRepositoryServices {
     public void deleteFriend(int id){
         friendServices.deleteById(id);
     }
+    public double getOneBalance(int id){
+        FriendsEntity friendRec=friendServices.findById(id).get();
+        return friendRec.getAmount();
+    }
 }

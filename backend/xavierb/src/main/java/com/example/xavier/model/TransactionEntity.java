@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 @Entity
 public class TransactionEntity {
     public TransactionEntity(int id, String expenseType, double amount, String currency, List<String> members,
-            LocalDate onDate, String split) {
+            LocalDate onDate, String split, String paidBy) {
         this.id = id;
         this.expenseType = expenseType;
         this.amount = amount;
@@ -18,6 +18,7 @@ public class TransactionEntity {
         this.members = members;
         this.onDate = onDate;
         this.split = split;
+        this.paidBy = paidBy;
     }
 
     @Id
@@ -29,6 +30,13 @@ public class TransactionEntity {
     private List<String> members;
     private LocalDate onDate;
     private String split;
+    private String paidBy;
+    public String getPaidBy() {
+        return paidBy;
+    }
+    public void setPaidBy(String paidBy) {
+        this.paidBy = paidBy;
+    }
 
     public TransactionEntity() {
     }

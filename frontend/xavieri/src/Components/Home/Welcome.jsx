@@ -9,8 +9,6 @@ import MoneyChart from "./Bar";
 import ExpensesPie from "./pie";
 
 
-
-
 const Welcome=({friendsList,expenseType,currencies,setList})=>{
     const authContext=useAuth()
     

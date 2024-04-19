@@ -33,7 +33,7 @@ const Manager = () => {
                             "rate":1
                         },
                         {
-                            "currency":"SEK",
+                            "currency":"INR",
                             "rate":data.rates.INR
                         },
                         {

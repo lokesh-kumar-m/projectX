@@ -1,7 +1,7 @@
 package com.example.xavier.Dto;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+
 
 public class TransactionDto {
     private String expenseType;

@@ -1,36 +1,46 @@
 import { useState } from "react"
 import { addNewLog } from "../API/logsApiService"
-import { AuthContext, useAuth } from "../auth"
+import { useAuth } from "../auth"
 
 
 const BillSplit = ({currencies,type,friendsList}) => {
+
     const authContext=useAuth()
     const [expenseAmount, setExpenseAmount] = useState(0)
     const [expenseCurrency, setExpenseCurrency] = useState('Expense Currency')
     const [expenseTypeValue, setExpenseType] = useState('Expense Type')
-    const [memberList, setMemberList] = useState([]);
+    const [memberList, setMemberList] = useState(new Map())
     const [splitType, setSplitType] = useState('Split inbetween')
     const [expenseDate,setExpenseDate]=useState(new Date().toISOString().slice(0, 10))
     const [expensePaidBy,setPaidBy]=useState('Paid By')
 
     function addMember(selectedMember) {
-        if (selectedMember !== '' && !memberList.includes(selectedMember)) {
-            setMemberList([...memberList, selectedMember]);
-        }
+    
+        const selectedId=friendsList.find(e=>e.friend===selectedMember)
+        const updatedList = new Map(memberList);
+        updatedList.set(selectedId.id, selectedMember);
+        setMemberList(updatedList);
     };
 
-    function removeMember(member) {
-        setMemberList(memberList.filter((m) => m !== member));
+    function removeMember(selectedMember) {
+        const updatedList = new Map(memberList);
+        updatedList.delete(selectedMember);
+        setMemberList(updatedList);
     };
     function handlesubmit() {
+        // console.log(memberList)
+        const serializedData = JSON.stringify([...memberList]);
         const LOG={
             amount:expenseAmount,
             currency:expenseCurrency,
             expenseType:expenseTypeValue,
-            members:memberList,
+            mapString:serializedData,
             split:splitType,
-            onDate:expenseDate
+            onDate:expenseDate,
+            paidBy:expensePaidBy,
+            flag:expensePaidBy===authContext.username
         }
+        console.log(expensePaidBy===authContext.username)
         addNewLog(LOG).then(
             (response)=>console.log(response.data)
         ).catch(
@@ -48,7 +58,7 @@ const BillSplit = ({currencies,type,friendsList}) => {
 
                 <label htmlFor="currency">Currency</label>
                 <select value={expenseCurrency} id="currency" onChange={(e) => setExpenseCurrency(e.target.value)}>
-                    <option value={expenseCurrency} disabled>{expenseCurrency}</option>
+                    <option value={expenseCurrency} disabled selected>{expenseCurrency}</option>
                     {currencies.map((c,id)=>(
                         <option key={id} value={c.currency}>{c.currency}</option>
                     ))}
@@ -56,8 +66,8 @@ const BillSplit = ({currencies,type,friendsList}) => {
                 <br />
 
                 <label htmlFor="type">Type</label>
-                <select value={expenseTypeValue} defaultValue={expenseTypeValue} id="type" onChange={(e) => setExpenseType(e.target.value)}>
-                    <option value={expenseTypeValue} disabled>{expenseTypeValue}</option>
+                <select value={expenseTypeValue} id="type" onChange={(e) => setExpenseType(e.target.value)}>
+                    <option value={expenseTypeValue} disabled selected>{expenseTypeValue}</option>
                     {type.map((et,id)=>(
                         <option key={id} value={et.type}>{et.type}</option>
                     ))}
@@ -68,16 +78,37 @@ const BillSplit = ({currencies,type,friendsList}) => {
 
                 <label htmlFor="members">Members</label>
                 <select id="members" onChange={(e) => addMember(e.target.value)}>
-                <option value="" disabled selected>Member included</option>
-                {friendsList.map((friend,id)=>(
-                        <option key={id} value={friend.friend}>{friend.friend}</option>
+                <option value={memberList} disabled selected>Member included</option>
+               
+                {friendsList.map((friend,x)=>(
+                        <option key={x} id={friend.id} value={friend.friend}>{friend.friend}</option>
                     ))}
                     
                 </select>
 
-                {memberList.length > 0 ? memberList.map((name, id) => (
-                    <p key={id}>{name}<span onClick={() => removeMember(name)}>X</span></p>
-                )) : " "}
+                {/* {Object.keys(memberList).length > 0 ? (
+                <div>
+                <h2>Selected Members:</h2>
+                {Object.values(memberList).map((item, index) => {
+                const [id, name] = Object.entries(item)[0]; // Extracting the key-value pair
+                return (
+                    <p key={index}> {name} <span onClick={() => removeMember(name)}> X</span></p>
+                );
+            })}
+            </div>
+            ) : (
+                <p>No members selected</p>
+            )} */}
+            {memberList.size > 0 ? (
+                <div>
+                    <h2>Selected Members:</h2>
+                    {Array.from(memberList).map(([id, name], index) => (
+                        <p key={index}>{name} <span onClick={() => removeMember(id)}>X</span></p>
+                    ))}
+                </div>
+            ) : (
+                <p>No members selected</p>
+            )}
 
 
                 <br />

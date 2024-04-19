@@ -7,18 +7,24 @@ public class TransactionDto {
     private String expenseType;
     private double amount;
     private String currency;
-    private HashMap<Integer,String> members;
+    private String mapString;
+    public String getMapString() {
+        return mapString;
+    }
+    public void setMapString(String mapString) {
+        this.mapString = mapString;
+    }
     private LocalDate onDate;
     private String split;
     private String paidBy;
     private double exchangeRate;
     private boolean flag;
-    public TransactionDto(String expenseType, double amount, String currency, HashMap<Integer, String> members,
-            LocalDate onDate, String split, String paidBy, double exchangeRate, boolean flag) {
+    public TransactionDto(String expenseType, double amount, String currency, String mapString, LocalDate onDate,
+            String split, String paidBy, double exchangeRate, boolean flag) {
         this.expenseType = expenseType;
         this.amount = amount;
         this.currency = currency;
-        this.members = members;
+        this.mapString = mapString;
         this.onDate = onDate;
         this.split = split;
         this.paidBy = paidBy;
@@ -55,12 +61,6 @@ public class TransactionDto {
     }
     public void setCurrency(String currency) {
         this.currency = currency;
-    }
-    public HashMap<Integer,String> getMembers() {
-        return members;
-    }
-    public void setMembers(HashMap<Integer,String> members) {
-        this.members = members;
     }
     public LocalDate getOnDate() {
         return onDate;

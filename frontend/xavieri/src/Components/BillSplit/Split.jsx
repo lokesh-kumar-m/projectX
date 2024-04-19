@@ -38,7 +38,8 @@ const BillSplit = ({currencies,type,friendsList}) => {
             split:splitType,
             onDate:expenseDate,
             paidBy:expensePaidBy,
-            flag:expensePaidBy===authContext.username
+            flag:expensePaidBy===authContext.username,
+            admin:authContext.username
         }
         console.log(expensePaidBy===authContext.username)
         addNewLog(LOG).then(

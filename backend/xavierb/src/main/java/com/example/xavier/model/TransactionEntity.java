@@ -31,6 +31,8 @@ public class TransactionEntity {
     private LocalDate onDate;
     private String split;
     private String paidBy;
+    private String username;
+    
     public String getPaidBy() {
         return paidBy;
     }
@@ -95,5 +97,11 @@ public class TransactionEntity {
 
     public void setSplit(String split) {
         this.split = split;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

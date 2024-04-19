@@ -24,7 +24,7 @@ public class TransactionsService {
         this.friendsRepo=friendsRepo;
     }
     
-    public void addTransaction(double amount,String currency,String type,String split,String membersString,LocalDate on,String paidBy,boolean flag, double exchangeRate ) throws JsonMappingException, JsonProcessingException{
+    public void addTransaction(double amount,String currency,String type,String split,String membersString,LocalDate on,String paidBy,boolean flag, double exchangeRate,String Username ) throws JsonMappingException, JsonProcessingException{
         ArrayList<String> mem=new ArrayList<>();
         HashMap<Integer,String> members=new HashMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -41,9 +41,9 @@ public class TransactionsService {
         log.setMembers(mem);
         log.setSplit(split);
         log.setPaidBy(paidBy);
+        log.setUsername(Username);
         transactionsServices.save(log);
         double splitAmount=amount/(mem.size()+1);
-        System.out.println(splitAmount);
         if(flag){
             members.forEach((key,val)-> friendsRepo.updateAmount(key, friendsRepo.getOneBalance(key)+splitAmount));
         }

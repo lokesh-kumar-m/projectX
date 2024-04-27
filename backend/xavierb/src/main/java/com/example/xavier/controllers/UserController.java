@@ -44,11 +44,6 @@ public class UserController {
         return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/users/Hello")
-    public String getHello() {
-        return "HEyya Buddy!";
-    }
-
 }
 
 

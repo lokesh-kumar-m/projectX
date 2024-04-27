@@ -8,19 +8,16 @@ public class TransactionDto {
     private double amount;
     private String currency;
     private String mapString;
-    public String getMapString() {
-        return mapString;
-    }
-    public void setMapString(String mapString) {
-        this.mapString = mapString;
-    }
     private LocalDate onDate;
     private String split;
     private String paidBy;
     private double exchangeRate;
     private boolean flag;
+    private String admin;
+
+    
     public TransactionDto(String expenseType, double amount, String currency, String mapString, LocalDate onDate,
-            String split, String paidBy, double exchangeRate, boolean flag) {
+            String split, String paidBy, double exchangeRate, boolean flag, String admin) {
         this.expenseType = expenseType;
         this.amount = amount;
         this.currency = currency;
@@ -30,6 +27,19 @@ public class TransactionDto {
         this.paidBy = paidBy;
         this.exchangeRate = exchangeRate;
         this.flag = flag;
+        this.admin = admin;
+    }
+    public String getAdmin() {
+        return admin;
+    }
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
+    public String getMapString() {
+        return mapString;
+    }
+    public void setMapString(String mapString) {
+        this.mapString = mapString;
     }
     public double getExchangeRate() {
         return exchangeRate;

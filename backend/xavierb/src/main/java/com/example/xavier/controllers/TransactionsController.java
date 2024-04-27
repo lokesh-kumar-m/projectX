@@ -34,6 +34,8 @@ public class TransactionsController {
             log.getOnDate(),
             log.getPaidBy(),
             log.isFlag(), 
-            log.getExchangeRate());
+            log.getExchangeRate(),
+            log.getAdmin()
+            );
     }
 }

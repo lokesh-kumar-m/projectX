@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 
 const pieData=[
-  {  value: 10, label: 'series A' },
+  {  value: 10, label: 'series A', origin:1 },
   {  value: 15, label: 'series B' },
   {  value: 20, label: 'series C' },
 ]
